@@ -1,17 +1,35 @@
-//Day and Time
-function formatDate (date) {
+//Date
+function formatDate (timestamp) {
+    let date = new Date(timestamp);
+
     let weekDays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     let weekDay = weekDays[date.getDay()];
-    console.log(weekDays[date.getDay()]);
 
     let months =["January","February","March","April","May","June","July","August","September","October","November","December"];
     let month = months[date.getMonth()];
-    console.log(months[date.getMonth()]);
 
     let day = now.getDate();
     return `${weekDay}, ${month}, ${day}`;
 }
 let todayDate = document.querySelector("#current-date");
 let now = new Date();
-console.log(new Date());
 todayDate.innerHTML = formatDate(now);
+
+//Hours
+function formatHours(timestamp) {
+    let date = new Date (timestamp);
+
+    let hours = date.getHours();
+    if (hours < 10) {
+        hours = `0${hours}`;
+    }
+
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
+
+    return `${hours}:${minutes}`;
+}
+let currentHour = document.querySelector("#current-hour");
+currentHour.innerHTML = formatHours(now);
