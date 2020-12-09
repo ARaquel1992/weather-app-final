@@ -33,3 +33,10 @@ function formatHours(timestamp) {
 }
 let currentHour = document.querySelector("#current-hour");
 currentHour.innerHTML = formatHours(now);
+
+//Request Forecast
+let apiKey = "f84d3c7abfdce95b297035c27acaaab5";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city name}&appid=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then();
+
