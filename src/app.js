@@ -35,11 +35,13 @@ let currentHour = document.querySelector("#current-hour");
 currentHour.innerHTML = formatHours(now);
 
 //Request Forecast
+function searchCity(city) {
 let apiKey = "f84d3c7abfdce95b297035c27acaaab5";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 
 axios.get(apiUrl).then(currentData);
+}
 
 //Current Details (temp, wind)
 function currentData(response) {
@@ -74,3 +76,17 @@ function currentData(response) {
     icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     icon.setAttribute("alt", response.data.weather[0].description);
 }
+
+//Search engine
+function search(event) {
+    event.preventDefault();
+    let citySearch = document.querySelector("#searched-city");
+    let searchField = document.querySelector("#search-field");
+    citySearch.innerHTML = searchField.value;
+
+    searchCity(searchField.value);
+}
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit",search);
