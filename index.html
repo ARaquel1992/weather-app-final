@@ -31,7 +31,8 @@
         </div>
         <div class="container-current-details">
         <div class="currentInformation">
-            <h1>Northampton</h1>
+            <h1 id="searched-city">
+            </h1>
             <ul>
                 <li id="current-date">
                 </li>
@@ -42,8 +43,7 @@
         <div class="currentDetails">
             <div class="row">
                 <div class="col">
-                    <p>
-                        -1
+                    <p id="today-temperature">
                     </p>
                 </div>
                 <div class="col-2">
@@ -59,24 +59,23 @@
             <div class="row">
                 <div class="col-6">
                 <ul>
-                 <li>
-                    high temperature | low temperature
+                <li>
+                    Feels like: <span id="feeling"></span>
                  </li>
                  <li>
-                    Precipitation: 3%
+                    Max:<span id="max-temp-today"></span> | Min:<span id="min-temp-today"></span>
                  </li>
                  <li>
-                    Humidity: 100%
+                     Humidity: <span id="humidity"></span>
                  </li>
                  <li>
-                    Wind: 2mph
+                     Wind: <span id="wind"></span>
                  </li>
                 </ul>
                 </div>
                 <div class="col-6">
                     <img src="https://ssl.gstatic.com/onebox/weather/64/fog.png" alt="fog" />
-                    <p>
-                        fog
+                    <p id="description">
                     </p>
                 </div>
             </div>
