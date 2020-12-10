@@ -38,11 +38,12 @@ currentHour.innerHTML = formatHours(now);
 let apiKey = "f84d3c7abfdce95b297035c27acaaab5";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
 
+
 axios.get(apiUrl).then(currentData);
 
 //Current Details (temp, wind)
 function currentData(response) {
-    console.log(response);
+
     let temperature = document.querySelector("#today-temperature");
     temperature.innerHTML = Math.round(response.data.main.temp);
 
@@ -68,4 +69,8 @@ function currentData(response) {
 
     let description = document.querySelector("#description");
     description.innerHTML = response.data.weather[0].description;
+
+    let icon = document.querySelector("#icon");
+    icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    icon.setAttribute("alt", response.data.weather[0].description);
 }
