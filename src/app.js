@@ -47,7 +47,8 @@ axios.get(apiUrl).then(currentData);
 function currentData(response) {
 
     let temperature = document.querySelector("#today-temperature");
-    temperature.innerHTML = Math.round(response.data.main.temp);
+    celsiusTemperature = response.data.main.temp;
+    temperature.innerHTML = Math.round(celsiusTemperature);
 
     let city = response.data.name;
     let country = response.data.sys.country;
@@ -55,13 +56,16 @@ function currentData(response) {
     h1.innerHTML = `${city}, ${country}`;
 
     let feelsLike = document.querySelector("#feeling");
-    feelsLike.innerHTML = Math.round(response.data.main.feels_like);
+    feelsTemperature = response.data.main.feels_like;
+    feelsLike.innerHTML = Math.round(feelsTemperature);
 
     let maxToday = document.querySelector("#max-temp-today");
-    maxToday.innerHTML = Math.round(response.data.main.temp_max);
+    maxTemperatureToday = response.data.main.temp_max;
+    maxToday.innerHTML = Math.round(maxTemperatureToday);
 
     let minToday = document.querySelector("#min-temp-today");
-    minToday.innerHTML = Math.round(response.data.main.temp_min);
+    minTemperatuteToday = response.data.main.temp_min;
+    minToday.innerHTML = Math.round(minTemperatuteToday);
 
     let humidityToday = document.querySelector("#humidity");
     humidityToday.innerHTML = response.data.main.humidity;
@@ -107,3 +111,64 @@ function retrievePosition (position) {
 
 let currentButton = document.querySelector("#current-location");
 currentButton.addEventListener("click", getPosition);
+
+//Conversion of units
+//conversion fahrenheit
+function displayFahrenheitTemp(event) {
+    event.preventDefault();
+    
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+
+    let temperatureC = document.querySelector("#today-temperature");
+    let temperatureF = (celsiusTemperature * 9) / 5 + 32;
+    temperatureC.innerHTML = Math.round(temperatureF);
+
+    let feelsLikeC = document.querySelector("#feeling");
+    let feelsLikeF = (feelsTemperature * 9) / 5 + 32;
+    feelsLikeC.innerHTML = Math.round(feelsLikeF);
+
+  let tempMaxC = document.querySelector("#max-temp-today");
+  let tempmaxF = (maxTemperatureToday * 9) / 5 + 32;
+  tempMaxC.innerHTML = Math.round(tempmaxF);
+
+  let tempMinC = document.querySelector("#min-temp-today");
+  let tempMinF = (minTemperatuteToday * 9) / 5 + 32;
+  tempMinC.innerHTML = Math.round(tempMinF);
+}
+
+//Conversion celsius
+function displayCelsiusTemp(event) {
+    event.preventDefault();
+
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    
+    let temperatureC = document.querySelector("#today-temperature");
+    temperatureC.innerHTML = Math.round(celsiusTemperature);
+
+    let feelsLike = document.querySelector("#feeling");
+    feelsLike.innerHTML = Math.round(feelsTemperature);
+
+    let maxToday = document.querySelector("#max-temp-today");
+    maxToday.innerHTML = Math.round(maxTemperatureToday);
+    
+    let minToday = document.querySelector("#min-temp-today");
+    minToday.innerHTML = Math.round(minTemperatuteToday);
+}
+
+let celsiusTemperature = null;
+
+let feelsTemperature = null;
+
+let maxTemperatureToday = null;
+
+let minTemperatuteToday = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
+
+searchCity("New York");

@@ -40,6 +40,22 @@ h1 {
   bottom: 0px;
   font-size: x-large;
 }
+a#celsius-link {
+  color: #7ea04d;
+  cursor: default;
+}
+a#celsius-link:hover {
+  text-decoration: none;
+  color: #7ea04d;
+}
+a#fahrenheit-link {
+  color: #7ea04d;
+  cursor: default;
+}
+a#fahrenheit-link:hover {
+  text-decoration: none;
+  color: #7ea04d;
+}
 ul {
   list-style: none;
 }
