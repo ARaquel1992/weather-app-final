@@ -85,6 +85,30 @@
         </div>
         <div class="forecastHours">
             <div class="row" id="hour-forecast">
+                <div class="col-3">
+                    <p>
+                        <strong></strong>
+                    </p>
+                    <p id="hourly-temperature">°</p>
+                </div>
+                <div class="col-3">
+                    <p>
+                        <strong>${formatHours(HourForecast.dt * 1000)}</strong>
+                    </p>
+                    <p id="hourly-temperature">${Math.round(HourForecast.main.temp)}°</p>
+                </div>
+                <div class="col-3">
+                    <p>
+                        <strong>${formatHours(HourForecast.dt * 1000)}</strong>
+                    </p>
+                    <p id="hourly-temperature">${Math.round(HourForecast.main.temp)}°</p>
+                </div>
+                <div class="col-3">
+                    <p>
+                        <strong>${formatHours(HourForecast.dt * 1000)}</strong>
+                    </p>
+                    <p id="hourly-temperature">${Math.round(HourForecast.main.temp)}°</p>
+                </div>
             </div>
         </div>
         <div class="forecastDays">

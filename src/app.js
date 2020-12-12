@@ -105,13 +105,18 @@ function forecastData(response){
 
     for (let index = 1; index < 7; index++) {
         let forecast = response.data.daily[index];
+        celsiusForecastMax = Math.round(forecast.temp.max);
+        celsiusForecastMin = Math.round(forecast.temp.min);
         forecastElement.innerHTML += `<div class="col-2">
                     <h3>
                         ${formatWeekDays(forecast.dt * 1000)}
                     </h3>
                     <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" class="icon-forecast" />
                     <div class="weather-forecast-temperature">
-                        <strong>${Math.round(forecast.temp.max)}°</strong> | ${Math.round(forecast.temp.min)}°
+                        <strong>
+                        <span class="forecast-max">${celsiusForecastMax}° </span>
+                        </strong> | 
+                        <span class="forecast-min"> ${celsiusForecastMin}° </span>
                     </div>
                 </div>`; 
     }
@@ -129,7 +134,7 @@ function forecastHour(response) {
                     <p>
                         <strong>${formatHours(HourForecast.dt * 1000)}</strong>
                     </p>
-                    <p>${Math.round(HourForecast.main.temp)}°</p>
+                    <p id="hourly-temperature">${Math.round(HourForecast.main.temp)}°</p>
                 </div>`;
     }
 
@@ -185,14 +190,31 @@ function displayFahrenheitTemp(event) {
     let feelsLikeF = (feelsTemperature * 9) / 5 + 32;
     feelsLikeC.innerHTML = Math.round(feelsLikeF);
 
-  let tempMaxC = document.querySelector("#max-temp-today");
-  let tempmaxF = (maxTemperatureToday * 9) / 5 + 32;
-  tempMaxC.innerHTML = Math.round(tempmaxF);
+    let tempMaxC = document.querySelector("#max-temp-today");
+    let tempmaxF = (maxTemperatureToday * 9) / 5 + 32;
+    tempMaxC.innerHTML = Math.round(tempmaxF);
 
-  let tempMinC = document.querySelector("#min-temp-today");
-  let tempMinF = (minTemperatuteToday * 9) / 5 + 32;
-  tempMinC.innerHTML = Math.round(tempMinF);
+    let tempMinC = document.querySelector("#min-temp-today");
+    let tempMinF = (minTemperatuteToday * 9) / 5 + 32;
+    tempMinC.innerHTML = Math.round(tempMinF);
+
+    let forecastMax = document.querySelector(".forecast-max");
+    forecastMax.forEach(function (item) {
+
+        let currentTemp = item.innerHTML;
+
+        item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+    });
+
+    let forecastMin = document.querySelector (".forecast-min");
+    forecastMin.forEach(function (item) {
+        
+        let currentTemp = item.innerHTML;
+
+        item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+    });
 }
+
 
 //Conversion celsius
 function displayCelsiusTemp(event) {
@@ -212,6 +234,8 @@ function displayCelsiusTemp(event) {
     
     let minToday = document.querySelector("#min-temp-today");
     minToday.innerHTML = Math.round(minTemperatuteToday);  
+
+    
 }
 
 let celsiusTemperature = null;
@@ -222,6 +246,7 @@ let maxTemperatureToday = null;
 
 let minTemperatuteToday = null;
 
+//disable the events to avoid double conversion
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
 
